@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignSpotter🚦</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .container h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .container input[type="file"] {
+            display: none;
+        }
+        .container label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .container img {
+            max-width: 1000px;
+            max-height: 200px;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .container .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SignSpotter: Indian Traffic Sign Recognition</h1>
+        <input type="file" id="imageUpload" accept="image/*">
+        <label for="imageUpload">Choose Image</label>
+        <img id="uploadedImage" src="#" alt="Image Preview" style="display:none;">
+        <div class="result" id="result"></div>
+        <div style="margin-top: 50px;"><h6>Designed by Subhayu Dutta 2024</h6></div>
+    </div>
+
+    <script>
+        document.getElementById('imageUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64String = e.target.result.split(',')[1]; // Ensure base64 encoding
+                    document.getElementById('uploadedImage').src = e.target.result;
+                    document.getElementById('uploadedImage').style.display = 'block';
+                    sendImageForPrediction(base64String);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function sendImageForPrediction(imageData) {
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ image: imageData }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = `Prediction: ${data[0].image}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerText = 'Error occurred while predicting.';
+            });
+        }
+    </script>
+</body>
+</html>
