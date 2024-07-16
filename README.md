@@ -50,7 +50,7 @@ Model evaluation is performed to assess the performance of the trained model on 
 
 The workflow of the pipeline, from data ingestion to model evaluation, is visualized in the provided image, showcasing the sequential flow of operations.
 
-![Sentiment Analysis Dashboard](templates/pipeline.png)
+![Traffic Analysis Dashboard](templates/pipeline.png)
 
 
 ## How to Run the Code
@@ -94,14 +94,14 @@ python app.py
 ```
 This command will start the Flask server with the specified host (0.0.0.0) and port (8080). This allows the Flask app to be accessible from any network interface on the specified port.
 
-### Predicting Sentiment
+### Predicting Traffic Sign
 Once the Flask app is running, you can access the following endpoints:
 ```
 /predict: Use this endpoint to predict tarffic sign for a given image input. You can either use cURL commands or visit the endpoint through your web browser.
 ```
 
 ### Training the Model
-To train the sentiment analysis model, use the following endpoint:
+To train the traffic sign analysis model, use the following endpoint:
 ```
 /train: Use this endpoint to trigger model training. You can either use cURL commands or visit the endpoint through your web browser.
 ```
@@ -139,7 +139,7 @@ To integrate your code with DagsHub for experiment tracking using MLflow, follow
 For Git Bash, use the export command instead of set.
 
 3. Update the MLflow tracking URI in your code to point to your DagsHub repository. You can do this in the src/reviewAnalysis/config/configuration.py file, specifically in the get_evaluation_config function where the mlflow_uri is defined.
-![Sentiment Analysis Dashboard](./templates/Screenshot_3.jpg)
+![Traffic Sign Analysis Dashboard](./templates/Screenshot_3.jpg)
 
 4. After running the pipeline using DVC (Data Version Control) with dvc repro, you can check the MLflow experiments through the DagsHub URL provided. You'll be able to view and analyze the experiment runs, including metrics, parameters, and artifacts.
 
@@ -198,19 +198,19 @@ This section provides users with clear instructions on how to install the depend
 
 ## Screenshot of the Live App
 
-Here is a screenshot of the live sentiment analysis application:
+Here is a screenshot of the live traffic sign detection application:
 
 ![Screenshot](templates/app_screenshot.jpg)
 
 ## Conclusion
 
-In conclusion, this project showcases the implementation of traffic sign detection using modern machine learning techniques and DevOps practices. By leveraging libraries such as TensorFlow, NLTK, and Flask, I have developed a robust sentiment analysis model.
+In conclusion, this project showcases the implementation of traffic sign detection using modern machine learning techniques and DevOps practices. By leveraging libraries such as TensorFlow, NLTK, and Flask, I have developed a robust traffic sign analysis model.
 
 Throughout the project, I have emphasized the importance of reproducibility and scalability. I have utilized DVC for versioning our data and models, while MLflow has enabled us to track experiments and monitor model performance effectively.
 
 As I continue to evolve this project, I aim to further enhance the model's accuracy and scalability, explore additional deployment options, and integrate more advanced features for better analysis and insights.
 
-I welcome contributions from the community to help us improve and expand the capabilities of this project. Whether it's through bug fixes, feature enhancements, or new ideas, together we can make this project even more impactful in the field of sentiment analysis and beyond.
+I welcome contributions from the community to help us improve and expand the capabilities of this project. Whether it's through bug fixes, feature enhancements, or new ideas, together we can make this project even more impactful in the field of traffic sign analysis and beyond.
 
 ## License and Acknowledgements
 
